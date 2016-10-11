@@ -10,14 +10,5 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
-    // MARK: properties
-    @IBOutlet weak var nameTextField: UITextField!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        nameTextField.delegate = self;
-    }
-    
-    // MARK: actions
-
 }
 
