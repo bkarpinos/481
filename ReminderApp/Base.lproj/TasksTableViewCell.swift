@@ -21,4 +21,13 @@ class TasksTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    //working on function to get data from new reminder controller
+    //to this controller to add elements within the table
+    /*override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if (segue.identifier == "segueTest") {
+            var svc = segue!.destinationViewController as secondViewController;
+            
+            svc.toPass = textField.text
+        }
+    }*/
 }

@@ -29,7 +29,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="OPO-UY-Qkw" kind="show" id="Wrr-hD-uEn"/>
+                                    <segue destination="tnh-EF-sem" kind="show" id="1vm-gD-YMw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RS7-8j-Dej">
@@ -49,6 +49,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-779.5" y="-386.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="G4y-3Q-vdP">
+            <objects>
+                <viewController id="tnh-EF-sem" customClass="ViewController" customModule="ReminderApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s2N-lJ-eK9"/>
+                        <viewControllerLayoutGuide type="bottom" id="eRh-OG-5sZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hGW-Mu-Bpm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pst-bV-uR8">
+                                <rect key="frame" x="16" y="69" width="286" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create New Reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSs-IM-hcB">
+                                <rect key="frame" x="24" y="20" width="297" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdg-bm-8g4">
+                                <rect key="frame" x="310" y="68" width="32" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createTaskTitle:" destination="tnh-EF-sem" eventType="touchUpInside" id="84C-kj-wcX"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description of Reminder" translatesAutoresizingMaskIntoConstraints="NO" id="tUU-2n-ZlC">
+                                <rect key="frame" x="16" y="123" width="286" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTr-wW-fUA">
+                                <rect key="frame" x="310" y="231" width="32" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createTaskDescription:" destination="tnh-EF-sem" eventType="touchUpInside" id="arx-TC-yNV"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tk9-Zn-pR5">
+                                <rect key="frame" x="0.0" y="269" width="375" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="498074285.29055101">
+                                    <!--2016-10-13 17:58:05 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20e-jH-dbY">
+                                <rect key="frame" x="129" y="439" width="116" height="30"/>
+                                <state key="normal" title="Create New Task">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="k58-Te-dqg" kind="show" id="qxZ-9f-yR3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="reminderTitle" destination="kSs-IM-hcB" id="g1O-qg-UbG"/>
+                        <outlet property="taskDescriptionInput" destination="tUU-2n-ZlC" id="alT-Cr-IFB"/>
+                        <outlet property="taskDueDate" destination="Tk9-Zn-pR5" id="fxV-MP-Tzi"/>
+                        <outlet property="taskTitleInput" destination="pst-bV-uR8" id="mlz-GJ-Ktx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BQp-ie-hDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-771.5" y="407.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="QSV-tP-cWw">
@@ -101,59 +180,8 @@
             </objects>
             <point key="canvasLocation" x="-331.5" y="-386.5"/>
         </scene>
-        <!--Task Due Date-->
-        <scene sceneID="LiM-QW-YhE">
-            <objects>
-                <viewController title="Task Due Date" id="OPO-UY-Qkw" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sos-aF-gtY"/>
-                        <viewControllerLayoutGuide type="bottom" id="PUo-RH-RBM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="b32-Ou-HD9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task title" borderStyle="roundedRect" placeholder="Reminder title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pKm-GT-ndO">
-                                <rect key="frame" x="61" y="62" width="253" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Edit this text to create a description for your new task..." translatesAutoresizingMaskIntoConstraints="NO" id="5yC-M2-YsS">
-                                <rect key="frame" x="36" y="114" width="289" height="122"/>
-                                <color key="backgroundColor" red="0.43703232540576276" green="0.56735326370664119" blue="1" alpha="0.47999999999999998" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES" address="YES" calendarEvent="YES"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYH-1j-qIL">
-                                <rect key="frame" x="164" y="612" width="46" height="30"/>
-                                <state key="normal" title="Home">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="juw-TQ-ODW"/>
-                                </connections>
-                            </button>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IFx-6j-T1b">
-                                <rect key="frame" x="0.0" y="253" width="375" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="497901369.49704802">
-                                    <!--2016-10-11 17:56:09 +0000-->
-                                </date>
-                            </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create New Reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1h-6V-iVb">
-                                <rect key="frame" x="69" y="10" width="236" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nsn-99-JOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-779.5" y="350.5"/>
-        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qxZ-9f-yR3"/>
+    </inferredMetricsTieBreakers>
 </document>
