@@ -13,6 +13,8 @@
 		C02C8F2E1DA95598009E9F0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C02C8F2D1DA95598009E9F0C /* Assets.xcassets */; };
 		C02C8F311DA95598009E9F0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02C8F2F1DA95598009E9F0C /* LaunchScreen.xib */; };
 		C02C8F3D1DA95599009E9F0C /* ReminderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C8F3C1DA95599009E9F0C /* ReminderAppTests.swift */; };
+		C05865221DB6948500D841F1 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05865201DB6948500D841F1 /* TaskList.swift */; };
+		C05865231DB6948500D841F1 /* TaskList.xib in Resources */ = {isa = PBXBuildFile; fileRef = C05865211DB6948500D841F1 /* TaskList.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,8 @@
 		C02C8F361DA95599009E9F0C /* ReminderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReminderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C02C8F3B1DA95599009E9F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C02C8F3C1DA95599009E9F0C /* ReminderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderAppTests.swift; sourceTree = "<group>"; };
-		C0B0B00A1DAD63AF00B1CEE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/TasksTableViewCell.swift; sourceTree = "<group>"; };
+		C05865201DB6948500D841F1 /* TaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		C05865211DB6948500D841F1 /* TaskList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskList.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +81,10 @@
 		C02C8F231DA95598009E9F0C /* ReminderApp */ = {
 			isa = PBXGroup;
 			children = (
+				C05865201DB6948500D841F1 /* TaskList.swift */,
+				C05865211DB6948500D841F1 /* TaskList.xib */,
 				C02C8F261DA95598009E9F0C /* AppDelegate.swift */,
 				C02C8F281DA95598009E9F0C /* ViewController.swift */,
-				C0B0B0091DAD63AF00B1CEE5 /* TasksTableViewCell.swift */,
 				C02C8F2A1DA95598009E9F0C /* Main.storyboard */,
 				C02C8F2D1DA95598009E9F0C /* Assets.xcassets */,
 				C02C8F2F1DA95598009E9F0C /* LaunchScreen.xib */,
@@ -195,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05865231DB6948500D841F1 /* TaskList.xib in Resources */,
 				C02C8F2C1DA95598009E9F0C /* Main.storyboard in Resources */,
 				C02C8F311DA95598009E9F0C /* LaunchScreen.xib in Resources */,
 				C02C8F2E1DA95598009E9F0C /* Assets.xcassets in Resources */,
@@ -215,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05865221DB6948500D841F1 /* TaskList.swift in Sources */,
 				C02C8F291DA95598009E9F0C /* ViewController.swift in Sources */,
 				C02C8F271DA95598009E9F0C /* AppDelegate.swift in Sources */,
 			);
@@ -253,14 +259,6 @@
 				C02C8F301DA95598009E9F0C /* Base */,
 			);
 			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		C0B0B0091DAD63AF00B1CEE5 /* TasksTableViewCell.swift */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C0B0B00A1DAD63AF00B1CEE5 /* Base */,
-			);
-			name = TasksTableViewCell.swift;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
