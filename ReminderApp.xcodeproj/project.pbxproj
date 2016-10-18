@@ -15,6 +15,7 @@
 		C02C8F311DA95598009E9F0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02C8F2F1DA95598009E9F0C /* LaunchScreen.xib */; };
 		C02C8F3D1DA95599009E9F0C /* ReminderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C8F3C1DA95599009E9F0C /* ReminderAppTests.swift */; };
 		C05865221DB6948500D841F1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05865201DB6948500D841F1 /* TaskTableViewCell.swift */; };
+		C05865251DB6D82200D841F1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05865241DB6D82200D841F1 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		C02C8F3B1DA95599009E9F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C02C8F3C1DA95599009E9F0C /* ReminderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderAppTests.swift; sourceTree = "<group>"; };
 		C05865201DB6948500D841F1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		C05865241DB6D82200D841F1 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +83,12 @@
 		C02C8F231DA95598009E9F0C /* ReminderApp */ = {
 			isa = PBXGroup;
 			children = (
-				C05865201DB6948500D841F1 /* TaskTableViewCell.swift */,
 				C02C8F261DA95598009E9F0C /* AppDelegate.swift */,
 				C02C8F281DA95598009E9F0C /* TaskViewController.swift */,
+				C05865241DB6D82200D841F1 /* Task.swift */,
 				C02C8F2A1DA95598009E9F0C /* Main.storyboard */,
 				37CB5A551DB6A69F00CD301C /* TaskTableViewController.swift */,
+				C05865201DB6948500D841F1 /* TaskTableViewCell.swift */,
 				C02C8F2D1DA95598009E9F0C /* Assets.xcassets */,
 				C02C8F2F1DA95598009E9F0C /* LaunchScreen.xib */,
 				C02C8F241DA95598009E9F0C /* Supporting Files */,
@@ -221,6 +224,7 @@
 			files = (
 				C05865221DB6948500D841F1 /* TaskTableViewCell.swift in Sources */,
 				C02C8F291DA95598009E9F0C /* TaskViewController.swift in Sources */,
+				C05865251DB6D82200D841F1 /* Task.swift in Sources */,
 				37CB5A561DB6A69F00CD301C /* TaskTableViewController.swift in Sources */,
 				C02C8F271DA95598009E9F0C /* AppDelegate.swift in Sources */,
 			);

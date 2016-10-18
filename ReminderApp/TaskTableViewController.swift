@@ -10,7 +10,7 @@ import UIKit
 
 class TaskTableViewController: UITableViewController {
 
-    var tasks = [TaskTableViewCell]()
+    var tasks = [Task]()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +40,36 @@ class TaskTableViewController: UITableViewController {
     }
 
   
+    @IBOutlet weak var taskDate: UILabel!
+    @IBOutlet weak var taskTitle: UILabel!
+    @IBOutlet weak var taskDescription: UILabel!
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "TaskTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-          as! TaskTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as TaskTableViewCell
         let task = tasks[indexPath.row]
       
         cell.taskTitle.text = task.title
         cell.taskDate.text = task.date
         cell.taskDescription.text = task.description
-
         return cell
+    }
+    
+    @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.sourceViewController as? TaskViewController{
+            
+            // Add a new task.
+            
+            let newIndexPath = NSIndexPath(forRow: tasks.count, inSection: 0)
+            
+            
+            tasks.append(sourceViewController.task!)
+            
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+            
+        }
+        
     }
 
 
@@ -97,8 +116,8 @@ class TaskTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
-  
+
+
     @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
       if let sourceViewController = sender.sourceViewController as? TaskViewController, task = sourceViewController.task {
         // Add a new task.
@@ -107,5 +126,7 @@ class TaskTableViewController: UITableViewController {
         tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
       }
     }
+    */
+  
 
 }

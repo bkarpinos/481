@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="U12-bf-EFW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="U12-bf-EFW">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -51,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="114.5" y="-310.5"/>
+            <point key="canvasLocation" x="1254.5" y="-30.5"/>
         </scene>
         <!--New Reminder-->
         <scene sceneID="G4y-3Q-vdP">
@@ -65,40 +64,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdg-bm-8g4">
-                                <rect key="frame" x="316" y="77" width="32" height="30"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createTaskTitle:" destination="tnh-EF-sem" eventType="touchUpInside" id="84C-kj-wcX"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description of Reminder" translatesAutoresizingMaskIntoConstraints="NO" id="tUU-2n-ZlC">
-                                <rect key="frame" x="16" y="123" width="286" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTr-wW-fUA">
-                                <rect key="frame" x="310" y="231" width="32" height="30"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createTaskDescription:" destination="tnh-EF-sem" eventType="touchUpInside" id="arx-TC-yNV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20e-jH-dbY">
-                                <rect key="frame" x="129" y="469" width="116" height="30"/>
-                                <state key="normal" title="Create New Task">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMc-M5-63O">
-                                <rect key="frame" x="164" y="440" width="46" height="21"/>
+                                <rect key="frame" x="164" y="496" width="46" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" staticText="YES" updatesFrequently="YES"/>
+                                    <accessibilityTraits key="traits" none="YES" staticText="YES" updatesFrequently="YES"/>
                                 </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Xvi-wK-RX8"/>
@@ -107,8 +76,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pst-bV-uR8">
+                                <rect key="frame" x="16" y="78" width="286" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tk9-Zn-pR5">
-                                <rect key="frame" x="0.0" y="269" width="375" height="162"/>
+                                <rect key="frame" x="0.0" y="326" width="375" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="498074285.29055101">
                                     <!--2016-10-13 17:58:05 +0000-->
                                 </date>
@@ -116,29 +90,32 @@
                                     <action selector="taskDateAction:" destination="tnh-EF-sem" eventType="valueChanged" id="lCM-bm-LVJ"/>
                                 </connections>
                             </datePicker>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pst-bV-uR8">
-                                <rect key="frame" x="16" y="78" width="286" height="30"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description of Reminder" translatesAutoresizingMaskIntoConstraints="NO" id="tUU-2n-ZlC">
+                                <rect key="frame" x="0.0" y="116" width="286" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uMc-M5-63O" firstAttribute="centerX" secondItem="Tk9-Zn-pR5" secondAttribute="centerX" id="0Wm-gP-big"/>
                             <constraint firstAttribute="bottom" secondItem="uMc-M5-63O" secondAttribute="bottom" constant="206" id="5da-8C-4Pd"/>
                             <constraint firstItem="uMc-M5-63O" firstAttribute="centerX" secondItem="hGW-Mu-Bpm" secondAttribute="centerX" id="Beg-us-e0e"/>
-                            <constraint firstItem="uMc-M5-63O" firstAttribute="centerX" secondItem="20e-jH-dbY" secondAttribute="centerX" id="O9A-aA-rTD"/>
                             <constraint firstItem="uMc-M5-63O" firstAttribute="leading" secondItem="hGW-Mu-Bpm" secondAttribute="leadingMargin" constant="144" id="X6L-AJ-o77"/>
                             <constraint firstItem="uMc-M5-63O" firstAttribute="top" secondItem="Tk9-Zn-pR5" secondAttribute="bottom" constant="9" id="aWQ-9g-tPs"/>
-                            <constraint firstItem="20e-jH-dbY" firstAttribute="top" secondItem="uMc-M5-63O" secondAttribute="bottom" constant="8" symbolic="YES" id="fiq-jk-Lau"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="New Reminder" id="Lzh-1I-Pnc">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2kL-Ua-cYy"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2kL-Ua-cYy">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="Bzf-xp-xzF"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="2zb-BO-ATv">
                             <connections>
-                                <segue destination="57N-Fe-90e" kind="unwind" unwindAction="unwindToTaskList:" id="mf6-lj-F7q"/>
+                                <segue destination="1Kr-2t-pCm" kind="show" id="bxE-lK-XXp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -154,9 +131,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BQp-ie-hDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="57N-Fe-90e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1303.5" y="730.5"/>
+            <point key="canvasLocation" x="1313.5" y="763.5"/>
         </scene>
         <!--Reminders-->
         <scene sceneID="nd9-57-Zto">
@@ -197,7 +173,6 @@
                                 <connections>
                                     <outlet property="taskDate" destination="kzS-e6-e7k" id="eUq-aw-FYh"/>
                                     <outlet property="taskDescription" destination="kzS-e6-e7k" id="PEh-Re-ao0"/>
-                                    <outlet property="taskTitle" destination="a38-mw-hfJ" id="iq9-QX-p0H"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -217,7 +192,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQN-ea-Xke" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1174" y="-221"/>
+            <point key="canvasLocation" x="470" y="123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bD0-vT-3qQ">
@@ -235,7 +210,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1r-kL-4pY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-780" y="-387"/>
+            <point key="canvasLocation" x="1212" y="-1203"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C62-vG-j9u">
@@ -253,7 +228,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jst-XF-z3n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="596.5" y="-331.5"/>
+            <point key="canvasLocation" x="436.5" y="-1019.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rze-my-7fX">
@@ -271,10 +246,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJK-06-DqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="716.5" y="730.5"/>
+            <point key="canvasLocation" x="556" y="1602"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Bzf-xp-xzF"/>
         <segue reference="YIP-zS-EWU"/>
+        <segue reference="bxE-lK-XXp"/>
     </inferredMetricsTieBreakers>
 </document>

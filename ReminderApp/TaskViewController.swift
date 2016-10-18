@@ -10,9 +10,7 @@ import UIKit
 
 class TaskViewController: UIViewController,  UITextFieldDelegate,
           UINavigationControllerDelegate{
-    var task: Task?
-    var taskTitle = "New Task Title"
-    var descriptionTitle = "Description of task"
+    var task = Task(title: "title", date: "date", description: "description")
   
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
@@ -26,16 +24,6 @@ class TaskViewController: UIViewController,  UITextFieldDelegate,
         //taskDescriptionInput.hidden = true
     }
     
-    //when submit is clicked taskTitle will hold the 
-    //user inputted title
-    @IBAction func createTaskTitle(sender: UIButton) {
-        taskTitle = taskTitleInput.text!
-        reminderTitle.text = "Creating " + taskTitleInput.text! + " reminder!"
-    }
-    
-    @IBAction func createTaskDescription(sender: UIButton) {
-        descriptionTitle = taskDescriptionInput.text
-    }
     @IBOutlet weak var taskDueDate: UIDatePicker!
   
     @IBAction func taskDateAction(sender: AnyObject) {
@@ -46,11 +34,7 @@ class TaskViewController: UIViewController,  UITextFieldDelegate,
   // Mark: Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if saveButton === sender {
-        let title = taskTitleInput.text
-        let date = dateLabel.text
-        let description = taskDescriptionInput.text
-      
-        task = Task(title: title, description: description, date: date)
+        let task = Task(title: taskTitleInput.text, date: dateLabel.text!, description: taskDescriptionInput.text)
     }
   }
   
