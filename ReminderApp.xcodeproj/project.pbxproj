@@ -80,8 +80,8 @@
 			children = (
 				C02C8F261DA95598009E9F0C /* AppDelegate.swift */,
 				C02C8F281DA95598009E9F0C /* ViewController.swift */,
-				C02C8F2A1DA95598009E9F0C /* Main.storyboard */,
 				C0B0B0091DAD63AF00B1CEE5 /* TasksTableViewCell.swift */,
+				C02C8F2A1DA95598009E9F0C /* Main.storyboard */,
 				C02C8F2D1DA95598009E9F0C /* Assets.xcassets */,
 				C02C8F2F1DA95598009E9F0C /* LaunchScreen.xib */,
 				C02C8F241DA95598009E9F0C /* Supporting Files */,
@@ -158,6 +158,7 @@
 		C02C8F191DA95598009E9F0C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Elizabeth Gentile";
 				TargetAttributes = {
