@@ -8,9 +8,12 @@
 
 import UIKit
 
-class TaskList: UITableViewCell {
+class TaskTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var taskTitle: UILabel!
+  @IBOutlet weak var taskTitle: UILabel!
+  @IBOutlet weak var taskDate: UILabel!
+  @IBOutlet weak var taskDescription: UILabel!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

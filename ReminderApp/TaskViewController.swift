@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TaskViewController.swift
 //  ReminderApp
 //
 //  Created by Elizabeth Gentile on 10/8/16.
@@ -8,11 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class TaskViewController: UIViewController,  UITextFieldDelegate,
+          UINavigationControllerDelegate{
+    var task: Task?
     var taskTitle = "New Task Title"
     var descriptionTitle = "Description of task"
-    
+  
+  @IBOutlet weak var saveButton: UIBarButtonItem!
+  
     @IBOutlet weak var taskTitleInput: UITextField!
     @IBOutlet weak var taskDescriptionInput: UITextView!
     @IBOutlet weak var reminderTitle: UILabel!
@@ -40,10 +43,16 @@ class ViewController: UIViewController {
       formatter.timeStyle = .ShortStyle
       self.dateLabel.text = formatter.stringFromDate(taskDueDate.date)
     }
+  // Mark: Navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if saveButton === sender {
+        let title = taskTitleInput.text
+        let date = dateLabel.text
+        let description = taskDescriptionInput.text
+      
+        task = Task(title: title, description: description, date: date)
+    }
+  }
   
- /* override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
-  }*/
-   
 }
 
