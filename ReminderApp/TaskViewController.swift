@@ -34,7 +34,7 @@ class TaskViewController: UIViewController,  UITextFieldDelegate,
   // Mark: Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if saveButton === sender {
-        let task = Task(title: taskTitleInput.text, date: dateLabel.text!, description: taskDescriptionInput.text)
+        let task = Task(title: taskTitleInput.text!, date: dateLabel.text!, description: taskDescriptionInput.text)
     }
   }
   
