@@ -112,7 +112,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Reminder" id="ACm-lM-a18">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gGL-XP-ihS"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gGL-XP-ihS">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="KEf-QP-EmW"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="x9m-2t-nuK">
                             <connections>
                                 <segue destination="JTR-yd-64d" kind="unwind" unwindAction="unwindToReminderListWithSender:" id="mxf-Cr-Owo"/>
