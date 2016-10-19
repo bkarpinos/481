@@ -19,7 +19,7 @@ class TaskTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +57,8 @@ class TaskTableViewController: UITableViewController {
     
     @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
         
-        if let sourceViewController = sender.sourceViewController as? TaskViewController{
+        if let sourceViewController = sender.sourceViewController as? TaskViewController
+        {
             
             // Add a new task.
             
