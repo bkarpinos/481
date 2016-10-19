@@ -10,8 +10,8 @@ import UIKit
 
 class TaskViewController: UIViewController,  UITextFieldDelegate,
           UINavigationControllerDelegate{
-    var task = Task(title: "title", date: "date", description: "description")
-  
+    
+    var task: Task?
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
     @IBOutlet weak var taskTitleInput: UITextField!
@@ -22,6 +22,7 @@ class TaskViewController: UIViewController,  UITextFieldDelegate,
     override func viewDidLoad(){
         super.viewDidLoad()
         //taskDescriptionInput.hidden = true
+        
     }
     
     @IBOutlet weak var taskDueDate: UIDatePicker!
@@ -34,7 +35,10 @@ class TaskViewController: UIViewController,  UITextFieldDelegate,
   // Mark: Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if saveButton === sender {
-        let task = Task(title: taskTitleInput.text!, date: dateLabel.text!, description: taskDescriptionInput.text)
+        let title = taskTitleInput.text!
+        let date = dateLabel.text!
+        let description = taskDescriptionInput.text
+        task = Task(title: title, date: date, description: description);
     }
   }
   

@@ -19,7 +19,15 @@ class TaskTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // loadSampleTask();
+    }
+    
+    func loadSampleTask()
+    {
+        let sampleTask1 = Task(title: "Sample Task", date: "11/06/94 at 6pm", description: "This is a sample of what a task will look like when a user adds it into our table")!;
+        let sampleTask2 = Task(title: "Sample Task 2", date: "11/07/94 at 6pm", description: "This is a sample of what another task will look like when a user adds it into our table")!;
+        tasks += [sampleTask1, sampleTask2];
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,14 +47,15 @@ class TaskTableViewController: UITableViewController {
         return tasks.count
     }
 
-  
+  /*
     @IBOutlet weak var taskDate: UILabel!
     @IBOutlet weak var taskTitle: UILabel!
     @IBOutlet weak var taskDescription: UILabel!
+*/
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "TaskTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TaskTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as TaskTableViewCell
         let task = tasks[indexPath.row]
       
         cell.taskTitle.text = task.title
