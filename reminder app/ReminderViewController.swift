@@ -33,6 +33,25 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        saveButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        checkValidReminderName()
+    }
+    
+    func checkValidReminderName() {
+        // Disable the Save button if the text field is empty.
+        let nameText = nameTextField.text ?? ""
+        saveButton.isEnabled = (!nameText.isEmpty)
+        
+    }
+
+
+    
     //MARK: Navigation
     
     // This method lets you configure a view controller before it's presented.
@@ -53,16 +72,15 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //reminderNameLabel.text = textField.text
-    }
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         nameTextField.delegate = self
+        
+        // Enable the Save button only if the text field has a valid Meal name.
+        checkValidReminderName()
     }
 
     override func didReceiveMemoryWarning() {
