@@ -42,6 +42,7 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="9rI-Uf-Gfq" id="ofj-e9-K7e"/>
                                     <outlet property="nameLabel" destination="r3u-PO-ODR" id="zMU-we-B4e"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="ylK-FQ-Ia7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -60,7 +61,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5DS-Ba-B6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479.19999999999999" y="132.68365817091455"/>
+            <point key="canvasLocation" x="369" y="-301"/>
         </scene>
         <!--New Reminder-->
         <scene sceneID="tne-QT-ifu">
@@ -132,7 +133,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="JTR-yd-64d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2103.1999999999998" y="132.68365817091455"/>
+            <point key="canvasLocation" x="2046" y="-301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8gA-S3-U7Z">
@@ -171,4 +172,7 @@
             <point key="canvasLocation" x="1164" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ylK-FQ-Ia7"/>
+    </inferredMetricsTieBreakers>
 </document>

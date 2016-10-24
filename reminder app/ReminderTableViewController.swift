@@ -103,15 +103,29 @@ class ReminderTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetail" {
+            
+            let reminderDetailViewController = segue.destination as! ReminderViewController
+            
+            if let selectedReminderCell = sender as? ReminderTableViewCell {
+                
+                let indexPath = tableView.indexPath(for: selectedReminderCell)!
+                let selectedReminder = reminders[indexPath.row]
+                reminderDetailViewController.reminder = selectedReminder
+            }
+        }
+        else if segue.identifier == "AddItem" {
+            print("Adding new reminder.")
+        }
     }
-    */
+
     
     @IBAction func unwindToReminderList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ReminderViewController, let reminder = sourceViewController.reminder {
