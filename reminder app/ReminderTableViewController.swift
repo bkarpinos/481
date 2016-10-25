@@ -22,8 +22,15 @@ class ReminderTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        // Load the sample data.
-        loadSampleReminders()
+        if let savedReminders = loadReminders() {
+            reminders += savedReminders
+        }
+        else{
+            // Load the sample data.
+            loadSampleReminders()
+        }
+        
+
     }
     
     func loadSampleReminders() {
@@ -86,6 +93,7 @@ class ReminderTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             reminders.remove(at: indexPath.row)
+            saveReminders()
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             
@@ -147,8 +155,23 @@ class ReminderTableViewController: UITableViewController {
                 reminders.append(reminder)
                 tableView.insertRows(at: [newIndexPath], with: .bottom)
             }
-            
+        
+            saveReminders()
         }
+    }
+    
+    
+    // MARK: NSCoding
+    func saveReminders() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(reminders, toFile: Reminder.ArchiveURL.path)
+        if !isSuccessfulSave {
+            print("Failed to save reminders...")
+        }
+        
+    }
+    
+    func loadReminders() -> [Reminder]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Reminder.ArchiveURL.path) as? [Reminder]
     }
 
 }
