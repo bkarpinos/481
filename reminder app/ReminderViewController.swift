@@ -56,7 +56,16 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddReminderMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddReminderMode {
+            dismiss(animated: true, completion: nil)
+        }
+        else{
+            navigationController!.popViewController(animated: true)
+        }
+        
     }
     
     
@@ -84,8 +93,17 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
         nameTextField.delegate = self
+        
+        // Set up views if editing an existing Meal.
+        if let reminder = reminder {
+            navigationItem.title = reminder.name
+            nameTextField.text   = reminder.name
+            dateTextField.text = reminder.date
+        }
         
         // Enable the Save button only if the text field has a valid Meal name.
         checkValidReminderName()
