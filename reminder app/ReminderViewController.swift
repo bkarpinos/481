@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ReminderViewController: UIViewController, UITextFieldDelegate {
     
@@ -18,7 +19,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-
+    
+    let today = Date()
+    let calen = Calendar.current
+    let df = DateFormatter()
     
     /*
      This value is either passed by `ReminderTableViewController` in `prepareForSegue(_:sender:)`
@@ -77,8 +81,14 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
             let name = nameTextField.text ?? ""
             let date = dateTextField.text ?? ""
             
+            let curYear = calen.component(.year, from: today)
+            let curMonth = calen.component(.month, from: today)
+            let curDay = calen.component(.day, from:today)
+            
+            df.dateFormat = "MMM-dd"
+            
             // Set the meal to be passed to MealTableViewController after the unwind segue.
-            reminder = Reminder(name: name, date: date)
+            reminder = Reminder(name: name, date: df.date(from: date)!)
 
         }
     }
@@ -94,15 +104,29 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let curYear = calen.component(.year, from: today)
+        let curMonth = calen.component(.month, from: today)
+        let curDay = calen.component(.day, from:today)
+
         // Do any additional setup after loading the view, typically from a nib.
         nameTextField.delegate = self
         
+        var out: String
         // Set up views if editing an existing Meal.
         if let reminder = reminder {
+            //Only display the year if it differs from todays
+            if(curYear == calen.component(.year, from: reminder.date)) {
+                df.dateFormat = "MMM dd"
+                out = df.string(from: reminder.date)
+            }
+            else {
+                df.dateFormat = "MMM dd yyyy"
+                out = df.string(from: reminder.date)
+            }
+            
             navigationItem.title = reminder.name
             nameTextField.text   = reminder.name
-            dateTextField.text = reminder.date
+            dateTextField.text = out
         }
         
         // Enable the Save button only if the text field has a valid Meal name.

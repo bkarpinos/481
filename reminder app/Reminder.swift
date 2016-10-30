@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Foundation
 
 class Reminder: NSObject, NSCoding{
     //MARK: Properties
     
     var name : String
-    var date : String
+    var date : Date
     
     
     // MARK: Archiving Paths
@@ -29,14 +30,14 @@ class Reminder: NSObject, NSCoding{
     
     // MARK: Initialization
     
-    init?(name: String, date: String) {
+    init?(name: String, date: Date) {
         // Initialize stored properties.
         self.name = name
         self.date = date
         
         super.init()
         
-        if name.isEmpty || date.isEmpty {
+        if name.isEmpty {
             return nil
         }
     }
@@ -49,7 +50,7 @@ class Reminder: NSObject, NSCoding{
     
     required convenience init?(coder aDecoder: NSCoder) {
         let name = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as! String
-        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as! String
+        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as! Date
         self.init(name: name, date: date)
     }
 }

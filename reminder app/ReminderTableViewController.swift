@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Foundation
 
 class ReminderTableViewController: UITableViewController {
     
     //MARK: Properties
     
     var reminders = [Reminder]()
+    let df = DateFormatter()
     
     
 
@@ -35,8 +37,9 @@ class ReminderTableViewController: UITableViewController {
     
     func loadSampleReminders() {
 
-        let reminder1 = Reminder(name: "EECS481: Finish Alpha", date: "Oct-20")!
-        let reminder2 = Reminder(name: "TC497: SRS ", date: "Oct-21")!
+        df.dateFormat = "MMM-dd"
+        let reminder1 = Reminder(name: "EECS481: Finish Alpha", date: df.date(from: "Oct-20")!)!
+        let reminder2 = Reminder(name: "TC497: SRS ", date: df.date(from: "Oct-21")!)!
         
         reminders += [reminder1, reminder2]
     }
@@ -68,7 +71,7 @@ class ReminderTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.nameLabel.text = reminder.name
-        cell.dateLabel.text = reminder.date
+        cell.dateLabel.text = df.string(from: reminder.date)
 
 
 
