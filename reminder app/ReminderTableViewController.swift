@@ -15,6 +15,7 @@ class ReminderTableViewController: UITableViewController {
     
     var reminders = [Reminder]()
     let df = DateFormatter()
+    let calen = Calendar.current
     
     
 
@@ -37,9 +38,9 @@ class ReminderTableViewController: UITableViewController {
     
     func loadSampleReminders() {
 
-        df.dateFormat = "MMM-dd"
-        let reminder1 = Reminder(name: "EECS481: Finish Alpha", date: df.date(from: "Oct-20")!)!
-        let reminder2 = Reminder(name: "TC497: SRS ", date: df.date(from: "Oct-21")!)!
+        df.dateFormat = "MMM-dd-yyyy"
+        let reminder1 = Reminder(name: "EECS481: Finish Alpha", date: df.date(from: "Oct-20-2016")!)!
+        let reminder2 = Reminder(name: "TC497: SRS ", date: df.date(from: "Oct-21-2017")!)!
         
         reminders += [reminder1, reminder2]
     }
@@ -69,7 +70,14 @@ class ReminderTableViewController: UITableViewController {
         // Fetches the appropriate meal for the data source layout.
         let reminder = reminders[indexPath.row]
 
-        // Configure the cell...
+        
+        //Only display the year if it differs from today's
+        if(calen.component(.year, from: Date()) == calen.component(.year, from: reminder.date)) {
+            df.dateFormat = "MMM dd"
+        }
+        else {
+            df.dateFormat = "MMM dd yyyy"
+        }        // Configure the cell...
         cell.nameLabel.text = reminder.name
         cell.dateLabel.text = df.string(from: reminder.date)
 
