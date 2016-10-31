@@ -72,7 +72,11 @@ class ReminderTableViewController: UITableViewController {
 
         
         //Only display the year if it differs from today's
-        if(calen.component(.year, from: Date()) == calen.component(.year, from: reminder.date)) {
+        if(calen.component(.month, from: Date()) == calen.component(.month, from: reminder.date) &&
+            calen.component(.day, from: Date()) == calen.component(.day, from: reminder.date)) {
+             df.dateFormat = "hh:mm"
+        }
+        else if(calen.component(.year, from: Date()) == calen.component(.year, from: reminder.date)) {
             df.dateFormat = "MMM dd"
         }
         else {

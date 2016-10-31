@@ -92,7 +92,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
             dc.hour = 10
             dc.minute = 3
             
-            df.dateFormat = "MMMM dd yyyy"
+            df.dateFormat = "hh:mm a MMMM dd, yyyy"
             
             // Set the meal to be passed to MealTableViewController after the unwind segue.
             reminder = Reminder(name: name, date: df.date(from: dateIn)!)
@@ -118,7 +118,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate {
 
         // Set up views if editing an existing Meal.
         if let reminder = reminder {
-            df.dateFormat = "MMMM dd yyyy"
+            df.dateFormat = "hh:mm a MMMM dd, yyyy"
             
             navigationItem.title = reminder.name
             nameTextField.text   = reminder.name
