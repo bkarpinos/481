@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import UserNotifications
+import UserNotificationsUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //get authorization for sending notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
+          if !accepted {
+            print("Notification access denied.")
+          }
+        }
+        //create the actions for the notification
+        let reminderActionView = UNNotificationAction(identifier: "view", title: "View", options: [] )
+        let reminderActionRemindLater = UNNotificationAction(identifier: "remindMe", title: "Remind Me Later", options: [])
+        //create a reminder catergory for notifications
+        let category = UNNotificationCategory(identifier: "reminderCategory", actions:[reminderActionView, reminderActionRemindLater], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+      
         return true
     }
 
@@ -40,7 +54,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    //takes in the date, title and description
+  func scheduleNotification(at date: Date/*, title: String, description: String*/){
+      //use a custome sound for our notification
+      let notificationSound = UNNotificationSound(named: "piano.wav")
+      //get the date components of the date passed in
+      let calendar = Calendar(identifier: .gregorian)
+      let components = calendar.dateComponents(in: .current, from: date)
+      let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month,   day: components.day, hour: components.hour, minute: components.minute)
+      //create the trigger for the notification
+      let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
+      //create a content object
+      let content = UNMutableNotificationContent()
+      content.categoryIdentifier = "reminderCategory"
+      content.title = "Need to figure out how to pass in a title of a notification"
+      content.body = "WIP"
+      content.sound = notificationSound
+    
+    
+      let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
+    
+      UNUserNotificationCenter.current().delegate = self
+      //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+      UNUserNotificationCenter.current().add(request) {(error) in
+      if let error = error {
+        print("Oh no an error! : \(error)")
+      }
+    }
+  }
+}
 
-
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    
+    if response.actionIdentifier == "remindMe" {
+      //15 minutes after the current date
+      let newDate = Date(timeInterval: 900, since: Date())
+      scheduleNotification(at: newDate)
+    }
+    else if response.actionIdentifier == "view" {
+      
+    }
+  }
 }
 
