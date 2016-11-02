@@ -50,7 +50,7 @@ class Reminder: NSObject, NSCoding{
     
     required convenience init?(coder aDecoder: NSCoder) {
         let name = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as! String
-        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as! Date
-        self.init(name: name, date: date)
+        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date
+        self.init(name: name, date: date!)
     }
 }

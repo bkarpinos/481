@@ -32,7 +32,6 @@ class ReminderTableViewController: UITableViewController {
             // Load the sample data.
             loadSampleReminders()
         }
-        
 
     }
     
