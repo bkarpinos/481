@@ -80,6 +80,55 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     }
     
     
+    private func startRecordingDate() throws
+    {
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(AVAudioSessionCategoryRecord)
+        try audioSession.setMode(AVAudioSessionModeMeasurement)
+        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
+        
+        // Configure request so that results are returned before audio recording is finished
+        recognitionRequest.shouldReportPartialResults = true
+        
+        // A recognition task represents a speech recognition session.
+        // We keep a reference to the task so that it can be cancelled.
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+            var isFinal = false
+            
+            if let result = result {
+                self.dateTextField.text = result.bestTranscription.formattedString
+                isFinal = result.isFinal
+            }
+            
+            if error != nil || isFinal {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                
+                self.recognitionRequest = nil
+                self.recognitionTask = nil
+                
+                self.recordButton.isEnabled = true
+                self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
+            }
+        }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        
+        try audioEngine.start()
+        
+        //nameTextField.text = "(Go ahead, I'm listening)"
+    }
     
     
     // This method lets you configure a view controller before it's presented.
@@ -108,11 +157,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     
     
     //MARK: Actions
-    @IBAction func setDefaultLabelText(_ sender: AnyObject) {
-        
-    }
+    @IBAction func setDefaultLabelText(_ sender: AnyObject) {}
     
-
     
     override func viewDidLoad()
     {
@@ -216,7 +262,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 self.recognitionTask = nil
                 
                 self.recordButton.isEnabled = true
-                self.recordButton.setTitle("Start Recording", for: [])
+                self.recordButton.setTitle("Listening for date...", for: [])
+                
+                //call function to listen for date
+                try! self.startRecordingDate()
             }
         }
         
@@ -237,7 +286,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         if available
         {
             recordButton.isEnabled = true
-            recordButton.setTitle("Start Recording", for: [])
+            recordButton.setTitle("(Go ahead, I'm listening for date)", for: [])
         }
         else
         {
@@ -245,7 +294,6 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             recordButton.setTitle("Recognition not available", for: .disabled)
         }
     }
-    
     @IBAction func recordButtonTapped()
     {
         if audioEngine.isRunning
@@ -254,6 +302,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             recognitionRequest?.endAudio()
             recordButton.isEnabled = false
             recordButton.setTitle("Stopping", for: .disabled)
+            // call function to record and replace date text
         }
         else
         {
@@ -266,7 +315,6 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 
