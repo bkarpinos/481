@@ -17,6 +17,7 @@
 		0969CFE81DAAAA5D0092B229 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0969CFE71DAAAA5D0092B229 /* Assets.xcassets */; };
 		0969CFEB1DAAAA5D0092B229 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0969CFE91DAAAA5D0092B229 /* LaunchScreen.storyboard */; };
 		0969CFF61DAAAA5D0092B229 /* reminder_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0969CFF51DAAAA5D0092B229 /* reminder_appTests.swift */; };
+		37E0B9AC1DCA546900A02CE6 /* piano.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37E0B9AB1DCA546900A02CE6 /* piano.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		0969CFF11DAAAA5D0092B229 /* reminder appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "reminder appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0969CFF51DAAAA5D0092B229 /* reminder_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminder_appTests.swift; sourceTree = "<group>"; };
 		0969CFF71DAAAA5D0092B229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37E0B9AB1DCA546900A02CE6 /* piano.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = piano.wav; path = ../../../../../Downloads/piano.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				0969CFE01DAAAA5D0092B229 /* AppDelegate.swift */,
+				37E0B9AB1DCA546900A02CE6 /* piano.wav */,
 				0969CFE21DAAAA5D0092B229 /* ReminderViewController.swift */,
 				095DFC611DB7BF6D005246EA /* ReminderTableViewController.swift */,
 				0969CFE41DAAAA5D0092B229 /* Main.storyboard */,
@@ -189,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37E0B9AC1DCA546900A02CE6 /* piano.wav in Resources */,
 				0969CFEB1DAAAA5D0092B229 /* LaunchScreen.storyboard in Resources */,
 				0969CFE81DAAAA5D0092B229 /* Assets.xcassets in Resources */,
 				0969CFE61DAAAA5D0092B229 /* Main.storyboard in Resources */,

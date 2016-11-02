@@ -84,7 +84,8 @@ class ReminderTableViewController: UITableViewController {
         cell.nameLabel.text = reminder.name
         cell.dateLabel.text = df.string(from: reminder.date)
 
-
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.scheduleNotification(at: reminder.date)
 
         return cell
     }
