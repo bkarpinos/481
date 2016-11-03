@@ -84,9 +84,6 @@ class ReminderTableViewController: UITableViewController {
         cell.nameLabel.text = reminder.name
         cell.dateLabel.text = df.string(from: reminder.date)
 
-        let delegate = UIApplication.shared.delegate as? AppDelegate
-        delegate?.scheduleNotification(at: reminder.date)
-
         return cell
     }
     
@@ -107,11 +104,13 @@ class ReminderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            let temp = reminders[indexPath.row]
             reminders.remove(at: indexPath.row)
             saveReminders()
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            
+            let delegate = UIApplication.shared.delegate as? AppDelegate
+            delegate?.deleteNotification(title: temp.name)
+          
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -160,15 +159,18 @@ class ReminderTableViewController: UITableViewController {
     @IBAction func unwindToReminderList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ReminderViewController, let reminder = sourceViewController.reminder {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing meal.
+                // Update an existing reminder.
                 reminders[selectedIndexPath.row] = reminder
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.editNotification(at: reminder.date, title: reminder.name)
             }
             else{
                 // Add a new reminder.
                 let newIndexPath = IndexPath(row: reminders.count, section: 0)
                 reminders.append(reminder)
                 tableView.insertRows(at: [newIndexPath], with: .bottom)
+              //might need to create a new notification here
             }
         
             saveReminders()
