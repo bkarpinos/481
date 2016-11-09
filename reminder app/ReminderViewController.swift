@@ -33,8 +33,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     var dc = DateComponents()
     
     let synth = AVSpeechSynthesizer()
-    var myUtterance = AVSpeechUtterance(string: "Now recording the title of your task");
-    
+
     /*
      This value is either passed by `ReminderTableViewController` in `prepareForSegue(_:sender:)`
      or constructed as part of adding a new meal.
@@ -301,8 +300,11 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     }
     @IBAction func recordButtonTapped()
     {
+        
+        let myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         myUtterance.volume = 1
-        myUtterance.rate = 0.3
+        myUtterance.rate = 0.1
         synth.speak(myUtterance)
         
         if audioEngine.isRunning
