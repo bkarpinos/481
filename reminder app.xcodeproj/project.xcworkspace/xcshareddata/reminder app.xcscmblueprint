@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6FF36396FF463BF4F1496BCA035C7BF13FD4DBEF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8291DB75FD632750FA2EDC8B993E7FA5FB9C7708" : 9223372036854775807,
+    "6FF36396FF463BF4F1496BCA035C7BF13FD4DBEF" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1F7A9E39-3A39-4FE8-A8B2-C4EA8AB1FA6F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8291DB75FD632750FA2EDC8B993E7FA5FB9C7708" : "..\/iOS-TextToSpeech",
+    "6FF36396FF463BF4F1496BCA035C7BF13FD4DBEF" : "481\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "reminder app",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "reminder app.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bkarpinos\/481.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6FF36396FF463BF4F1496BCA035C7BF13FD4DBEF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tutsplus\/iOS-TextToSpeech.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8291DB75FD632750FA2EDC8B993E7FA5FB9C7708"
+    }
+  ]
+}
