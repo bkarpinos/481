@@ -58,7 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //takes in the date, title and description
   func scheduleNotification(at date: Date, title: String/*, description: String*/){
       //use a custome sound for our notification
-      let notificationSound = UNNotificationSound(named: "piano.wav")
+      //let notificationSound = UNNotificationSound(named: "piano.wav")
+      //let notificationSound = UNNotificationSound.default
       //get the date components of the date passed in
       let calendar = Calendar(identifier: .gregorian)
       let components = calendar.dateComponents(in: .current, from: date)
@@ -70,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       content.categoryIdentifier = "reminderCategory"
       content.title = title
       //content.body = "WIP"
-      content.sound = notificationSound
+      //content.sound = notificationSound
     
       //use the title as the identifier
       let request = UNNotificationRequest(identifier: title, content: content, trigger: trigger)

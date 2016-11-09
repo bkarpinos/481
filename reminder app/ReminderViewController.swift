@@ -141,23 +141,22 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             let name = nameTextField.text ?? ""
             let dateIn = dateTextField.text ?? ""
             
-            let curYear = calen.component(.year, from: today)
-            let curMonth = calen.component(.month, from: today)
-            let curDay = calen.component(.day, from:today)
             
-            dc.year = curYear
-            dc.month = curMonth
-            dc.day = curDay
-            dc.hour = 10
-            dc.minute = 3
+            let types: NSTextCheckingResult.CheckingType = [.date]
+            let detector = try? NSDataDetector(types: types.rawValue)
+            let matches = detector?.matches(in: dateIn, options: [], range: NSMakeRange(0, (dateIn as NSString).length))
+            for match in matches! {
+                //print(match.date ?? "no_date")
+                reminder = Reminder(name: name, date: match.date!)
+                
+            }
             
             df.dateFormat = "hh:mm a MMMM dd, yyyy"
             
-            // Set the meal to be passed to MealTableViewController after the unwind segue.
-            reminder = Reminder(name: name, date: df.date(from: dateIn)!)
+            
             //create the local notification
-            let delegate = UIApplication.shared.delegate as? AppDelegate
-            delegate?.scheduleNotification(at: df.date(from: dateIn)!, title:name/*, body:*/)
+//            let delegate = UIApplication.shared.delegate as? AppDelegate
+//            delegate?.scheduleNotification(at: df.date(from: dateIn)!, title:name/*, body:*/)
         }
     }
     
