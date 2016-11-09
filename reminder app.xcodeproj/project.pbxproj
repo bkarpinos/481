@@ -18,6 +18,8 @@
 		0969CFEB1DAAAA5D0092B229 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0969CFE91DAAAA5D0092B229 /* LaunchScreen.storyboard */; };
 		0969CFF61DAAAA5D0092B229 /* reminder_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0969CFF51DAAAA5D0092B229 /* reminder_appTests.swift */; };
 		C08829651DCAC5DD00AE22BF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08829641DCAC5DD00AE22BF /* AVFoundation.framework */; };
+		C088296B1DD395D500AE22BF /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = C08829681DD395D500AE22BF /* Button.png */; };
+		C088296C1DD395D500AE22BF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C08829691DD395D500AE22BF /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		0969CFF51DAAAA5D0092B229 /* reminder_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminder_appTests.swift; sourceTree = "<group>"; };
 		0969CFF71DAAAA5D0092B229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C08829641DCAC5DD00AE22BF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C08829681DD395D500AE22BF /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
+		C08829691DD395D500AE22BF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				0969CFE71DAAAA5D0092B229 /* Assets.xcassets */,
 				0969CFE91DAAAA5D0092B229 /* LaunchScreen.storyboard */,
 				0969CFEC1DAAAA5D0092B229 /* Info.plist */,
+				C088296A1DD395D500AE22BF /* Supporting Files */,
 			);
 			path = "reminder app";
 			sourceTree = "<group>";
@@ -116,6 +121,16 @@
 				C08829641DCAC5DD00AE22BF /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C088296A1DD395D500AE22BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C08829681DD395D500AE22BF /* Button.png */,
+				C08829691DD395D500AE22BF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			path = "../../../iOS-TextToSpeech/tts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C088296C1DD395D500AE22BF /* Info.plist in Resources */,
+				C088296B1DD395D500AE22BF /* Button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

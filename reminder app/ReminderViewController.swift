@@ -33,7 +33,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     var dc = DateComponents()
     
     let synth = AVSpeechSynthesizer()
-    var myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
+    var myUtterance = AVSpeechUtterance(string: "Now recording the title of your task");
     
     /*
      This value is either passed by `ReminderTableViewController` in `prepareForSegue(_:sender:)`
@@ -292,7 +292,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         if available
         {
             recordButton.isEnabled = true
-            recordButton.setTitle("(Go ahead, I'm listening for date)", for: [])
+            recordButton.setTitle("Click to stop recording date", for: [])
         }
         else
         {
@@ -302,6 +302,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     }
     @IBAction func recordButtonTapped()
     {
+        myUtterance.volume = 1
+        myUtterance.rate = 0.3
+        synth.speak(myUtterance)
+        
         if audioEngine.isRunning
         {
             audioEngine.stop()
@@ -312,8 +316,6 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         }
         else
         {
-            myUtterance.rate = 0.3
-            synth.speak(myUtterance)
             try! startRecording()
             recordButton.setTitle("Stop recording", for: [])
         }
