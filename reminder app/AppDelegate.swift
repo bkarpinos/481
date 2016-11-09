@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //get authorization for sending notifications
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {(accepted, error) in
           if !accepted {
             print("Notification access denied.")
           }
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     //takes in the date, title and description
-  func scheduleNotification(at date: Date/*, title: String, description: String*/){
+  func scheduleNotification(at date: Date, title: String/*, description: String*/){
       //use a custome sound for our notification
       let notificationSound = UNNotificationSound(named: "piano.wav")
       //get the date components of the date passed in
@@ -68,12 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       //create a content object
       let content = UNMutableNotificationContent()
       content.categoryIdentifier = "reminderCategory"
-      content.title = "Need to figure out how to pass in a title of a notification"
-      content.body = "WIP"
+      content.title = title
+      //content.body = "WIP"
       content.sound = notificationSound
     
-    
-      let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
+      //use the title as the identifier
+      let request = UNNotificationRequest(identifier: title, content: content, trigger: trigger)
     
       UNUserNotificationCenter.current().delegate = self
       //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -83,15 +83,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
   }
+  //removes the original notification and creates a new one
+  func editNotification(at date: Date, title: String){
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [title])
+    scheduleNotification(at: date, title: title)
+  }
+  //removes the notification from the notification center
+  func deleteNotification(title: String){
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [title])
+  }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    
+    let notify = response.notification
+    let request = notify.request
+    let iden = request.identifier
+    //let content = request.content
+    //let body = content.body
     if response.actionIdentifier == "remindMe" {
       //15 minutes after the current date
       let newDate = Date(timeInterval: 900, since: Date())
-      scheduleNotification(at: newDate)
+      scheduleNotification(at: newDate, title: iden/*, description: body*/)
     }
     else if response.actionIdentifier == "view" {
       

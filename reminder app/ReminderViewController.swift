@@ -155,11 +155,13 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             
             // Set the meal to be passed to MealTableViewController after the unwind segue.
             reminder = Reminder(name: name, date: df.date(from: dateIn)!)
-
+            //create the local notification
+            let delegate = UIApplication.shared.delegate as? AppDelegate
+            delegate?.scheduleNotification(at: df.date(from: dateIn)!, title:name/*, body:*/)
         }
     }
     
-    
+  
     //MARK: Actions
     @IBAction func setDefaultLabelText(_ sender: AnyObject) {}
     
