@@ -298,13 +298,14 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             recordButton.setTitle("Recognition not available", for: .disabled)
         }
     }
-    @IBAction func recordButtonTapped()
-    {
-        
-        let myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
+    
+    @IBAction func micButtonTapped() {
+        var myUtterance = AVSpeechUtterance(string: "")
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         myUtterance.volume = 1
         myUtterance.rate = 0.1
+        synth.speak(myUtterance)
+        myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
         synth.speak(myUtterance)
         
         if audioEngine.isRunning
@@ -320,6 +321,34 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             try! startRecording()
             recordButton.setTitle("Stop recording", for: [])
         }
+
+    }
+    
+    
+    @IBAction func recordButtonTapped()
+    {
+        
+        /*var myUtterance = AVSpeechUtterance(string: "")
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        myUtterance.volume = 1
+        myUtterance.rate = 0.1
+        synth.speak(myUtterance)
+        myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
+        synth.speak(myUtterance)
+        
+        if audioEngine.isRunning
+        {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            recordButton.isEnabled = false
+            recordButton.setTitle("Stopping", for: .disabled)
+            // call function to record and replace date text
+        }
+        else
+        {
+            try! startRecording()
+            recordButton.setTitle("Stop recording", for: [])
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
