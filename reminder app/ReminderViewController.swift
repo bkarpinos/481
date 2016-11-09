@@ -267,7 +267,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 self.recognitionTask = nil
                 
                 self.recordButton.isEnabled = true
-                self.recordButton.setTitle("Listening for date...", for: [])
+                self.recordButton.setTitle("Press to stop listening for date", for: [])
                 
                 //call function to listen for date
                 try! self.startRecordingDate()
