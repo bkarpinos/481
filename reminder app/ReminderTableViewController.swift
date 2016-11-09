@@ -89,9 +89,6 @@ class ReminderTableViewController: UITableViewController {
 
         return cell
     }
-    
-
-
 
     
     // Override to support conditional editing of the table view.
@@ -99,7 +96,6 @@ class ReminderTableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
     
 
     
@@ -182,7 +178,6 @@ class ReminderTableViewController: UITableViewController {
         if !isSuccessfulSave {
             print("Failed to save reminders...")
         }
-        
     }
     
     func loadReminders() -> [Reminder]? {

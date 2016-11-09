@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import Speech
+import AVFoundation
 
 class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRecognizerDelegate {
     
@@ -30,6 +31,9 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     let calen = Calendar.current
     let df = DateFormatter()
     var dc = DateComponents()
+    
+    let synth = AVSpeechSynthesizer()
+    var myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
     
     /*
      This value is either passed by `ReminderTableViewController` in `prepareForSegue(_:sender:)`
@@ -306,6 +310,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         }
         else
         {
+            myUtterance.rate = 0.3
+            synth.speak(myUtterance)
             try! startRecording()
             recordButton.setTitle("Stop recording", for: [])
         }
