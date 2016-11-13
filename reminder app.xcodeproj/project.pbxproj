@@ -17,6 +17,7 @@
 		0969CFE81DAAAA5D0092B229 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0969CFE71DAAAA5D0092B229 /* Assets.xcassets */; };
 		0969CFEB1DAAAA5D0092B229 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0969CFE91DAAAA5D0092B229 /* LaunchScreen.storyboard */; };
 		0969CFF61DAAAA5D0092B229 /* reminder_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0969CFF51DAAAA5D0092B229 /* reminder_appTests.swift */; };
+		09DDD61F1DD8EC1F006B9C73 /* Squirel_splash_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09DDD61E1DD8EC1F006B9C73 /* Squirel_splash_1.png */; };
 		5E7B63C01DD39DF400CADBD0 /* peaceful_piano_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B63BF1DD39DF400CADBD0 /* peaceful_piano_music.mp3 */; };
 		C08829651DCAC5DD00AE22BF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08829641DCAC5DD00AE22BF /* AVFoundation.framework */; };
 		C088296B1DD395D500AE22BF /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = C08829681DD395D500AE22BF /* Button.png */; };
@@ -47,6 +48,7 @@
 		0969CFF11DAAAA5D0092B229 /* reminder appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "reminder appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0969CFF51DAAAA5D0092B229 /* reminder_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminder_appTests.swift; sourceTree = "<group>"; };
 		0969CFF71DAAAA5D0092B229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09DDD61E1DD8EC1F006B9C73 /* Squirel_splash_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Squirel_splash_1.png; path = "squirell logo/Squirel_splash_1.png"; sourceTree = SOURCE_ROOT; };
 		5E7B63BF1DD39DF400CADBD0 /* peaceful_piano_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = peaceful_piano_music.mp3; path = ../../../../Downloads/peaceful_piano_music.mp3; sourceTree = "<group>"; };
 		C08829641DCAC5DD00AE22BF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C08829681DD395D500AE22BF /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		C088296A1DD395D500AE22BF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				09DDD61E1DD8EC1F006B9C73 /* Squirel_splash_1.png */,
 				C08829681DD395D500AE22BF /* Button.png */,
 				C08829691DD395D500AE22BF /* Info.plist */,
 			);
@@ -185,7 +188,7 @@
 				TargetAttributes = {
 					0969CFDC1DAAAA5C0092B229 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 2ZQXA6S44J;
+						DevelopmentTeam = V6Z2NDN87J;
 						ProvisioningStyle = Automatic;
 					};
 					0969CFF01DAAAA5D0092B229 = {
@@ -221,6 +224,7 @@
 			files = (
 				0969CFEB1DAAAA5D0092B229 /* LaunchScreen.storyboard in Resources */,
 				0969CFE81DAAAA5D0092B229 /* Assets.xcassets in Resources */,
+				09DDD61F1DD8EC1F006B9C73 /* Squirel_splash_1.png in Resources */,
 				0969CFE61DAAAA5D0092B229 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,12 +392,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 2ZQXA6S44J;
+				DEVELOPMENT_TEAM = V6Z2NDN87J;
 				INFOPLIST_FILE = "reminder app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.reminder-app-xyz";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.reminder-app-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -403,12 +406,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = 2ZQXA6S44J;
+				DEVELOPMENT_TEAM = V6Z2NDN87J;
 				INFOPLIST_FILE = "reminder app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.reminder-app-xyz";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.reminder-app-2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
