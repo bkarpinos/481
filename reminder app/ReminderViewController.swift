@@ -148,14 +148,11 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 //print(match.date ?? "no_date")
                 reminder = Reminder(name: name, date: match.date!)
                 
+                
             }
             
             df.dateFormat = "hh:mm a MMMM dd, yyyy"
-            
-            
-            //create the local notification
-//            let delegate = UIApplication.shared.delegate as? AppDelegate
-//            delegate?.scheduleNotification(at: df.date(from: dateIn)!, title:name/*, body:*/)
+          
         }
     }
     
