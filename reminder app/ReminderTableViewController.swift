@@ -166,7 +166,9 @@ class ReminderTableViewController: UITableViewController {
                 let newIndexPath = IndexPath(row: reminders.count, section: 0)
                 reminders.append(reminder)
                 tableView.insertRows(at: [newIndexPath], with: .bottom)
-              //might need to create a new notification here
+                //create the local notification
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.scheduleNotification(at: reminder.date, title: reminder.name/*, body:*/)
             }
         
             saveReminders()

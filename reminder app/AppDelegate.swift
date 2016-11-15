@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    {
         //get authorization for sending notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {(accepted, error) in
           if !accepted {
@@ -57,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     //takes in the date, title and description
   func scheduleNotification(at date: Date, title: String/*, description: String*/){
-      //use a custome sound for our notification
+      //use a custom sound for our notification
       let notificationSound = UNNotificationSound(named: "peaceful_piano_music.mp3")
       //let notificationSound = UNNotificationSound.default
       //get the date components of the date passed in
@@ -70,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let content = UNMutableNotificationContent()
       content.categoryIdentifier = "reminderCategory"
       content.title = title
-      //content.body = "WIP"
+      content.body = "Reminder"
       content.sound = notificationSound
     
       //use the title as the identifier
@@ -84,11 +85,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
   }
+  
   //removes the original notification and creates a new one
   func editNotification(at date: Date, title: String){
     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [title])
     scheduleNotification(at: date, title: title)
   }
+  
   //removes the notification from the notification center
   func deleteNotification(title: String){
     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [title])
