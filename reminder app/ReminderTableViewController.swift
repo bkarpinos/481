@@ -26,7 +26,16 @@ class ReminderTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         
         if let savedReminders = loadReminders() {
-            reminders += savedReminders
+            
+            //First filter out expired reminders
+            var goodReminders = [Reminder]()
+            for reminder in savedReminders {
+                if(reminder.date > Date()) {
+                    goodReminders.append(reminder)
+                }
+            }
+                
+            reminders += goodReminders.sorted {$0.date < $1.date}
         }
         else{
             // Load the sample data.
@@ -68,7 +77,6 @@ class ReminderTableViewController: UITableViewController {
         
         // Fetches the appropriate meal for the data source layout.
         let reminder = reminders[indexPath.row]
-
         
         //Only display the year if it differs from today's
         if(calen.component(.month, from: Date()) == calen.component(.month, from: reminder.date) &&
