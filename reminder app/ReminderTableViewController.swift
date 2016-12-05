@@ -38,10 +38,9 @@ class ReminderTableViewController: UITableViewController {
     func loadSampleReminders() {
 
         df.dateFormat = "MMM-dd-yyyy"
-        let reminder1 = Reminder(name: "EECS481: Finish Alpha", date: df.date(from: "Oct-20-2016")!)!
-        let reminder2 = Reminder(name: "TC497: SRS ", date: df.date(from: "Oct-21-2017")!)!
+        let reminder1 = Reminder(name: "EECS481: Final Demo", date: df.date(from: "Dec-12-2016")!)!
         
-        reminders += [reminder1, reminder2]
+        reminders += [reminder1]
     }
 
     override func didReceiveMemoryWarning() {
