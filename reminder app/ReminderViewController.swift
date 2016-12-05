@@ -27,6 +27,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    
     let today = Date()
     let calen = Calendar.current
     let df = DateFormatter()

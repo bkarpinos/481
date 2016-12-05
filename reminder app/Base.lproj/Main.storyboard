@@ -116,6 +116,20 @@
                                     <action selector="micButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="EG2-bD-jT1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uuw-ir-pZk">
+                                <rect key="frame" x="16" y="427" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhO-xo-wa4">
+                                <rect key="frame" x="16" y="459" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -132,10 +146,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dateLabel" destination="WhO-xo-wa4" id="xef-eh-kJZ"/>
                         <outlet property="dateTextField" destination="VxK-f6-dbN" id="Z6A-Nb-OHi"/>
                         <outlet property="nameTextField" destination="taF-Hf-rq6" id="Zcs-8x-R01"/>
                         <outlet property="recordButton" destination="c6X-W1-uGq" id="zEV-UP-fQZ"/>
                         <outlet property="saveButton" destination="x9m-2t-nuK" id="GeO-m0-7TG"/>
+                        <outlet property="titleLabel" destination="Uuw-ir-pZk" id="1AK-Hj-U85"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
