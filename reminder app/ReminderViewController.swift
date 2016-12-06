@@ -14,7 +14,7 @@ import AVFoundation
 class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRecognizerDelegate {
     
     
-
+    
     
     //MARK: Properties
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
@@ -33,11 +33,12 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     var dc = DateComponents()
     
     let synth = AVSpeechSynthesizer()
-
+    
     /*
      This value is either passed by `ReminderTableViewController` in `prepareForSegue(_:sender:)`
      or constructed as part of adding a new meal.
      */
+    
     var reminder: Reminder?
     
     //MARK: UITextFieldDelegate
@@ -63,8 +64,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         saveButton.isEnabled = (!nameText.isEmpty)
         
     }
-
-
+    
+    
     
     //MARK: Navigation
     
@@ -118,6 +119,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 
                 self.recordButton.isEnabled = true
                 self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
+                self.checkRecordingIsCorrect()
+                
             }
         }
         
@@ -152,11 +155,11 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             }
             
             df.dateFormat = "hh:mm a MMMM dd, yyyy"
-          
+            
         }
     }
     
-  
+    
     //MARK: Actions
     @IBAction func setDefaultLabelText(_ sender: AnyObject) {}
     
@@ -166,14 +169,13 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         super.viewDidLoad()
         
         //let curYear = calen.component(.year, from: today)
-
+        
         // Do any additional setup after loading the view, typically from a nib.
         nameTextField.delegate = self
         
         
         recordButton.isEnabled = false
-
-        // Set up views if editing an existing Meal.
+        
         if let reminder = reminder
         {
             df.dateFormat = "hh:mm a MMMM dd, yyyy"
@@ -193,34 +195,34 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         
         SFSpeechRecognizer.requestAuthorization
             { authStatus in
-            /*
-             The callback may not be called on the main thread. Add an
-             operation to the main queue to update the record button's state.
-             */
-            OperationQueue.main.addOperation
-                {
-                switch authStatus
-                {
-                case .authorized:
-                    print("Authorized");
-                    self.recordButton.isEnabled = true
-                    
-                case .denied:
-                    print("Denied");
-                    self.recordButton.isEnabled = false
-                    self.recordButton.setTitle("User denied access to speech recognition", for: .disabled)
-                    
-                case .restricted:
-                    print("Restricted");
-                    self.recordButton.isEnabled = false
-                    self.recordButton.setTitle("Speech recognition restricted on this device", for: .disabled)
-                    
-                case .notDetermined:
-                    print("Not Determined");
-                    self.recordButton.isEnabled = false
-                    self.recordButton.setTitle("Speech recognition not yet authorized", for: .disabled)
+                /*
+                 The callback may not be called on the main thread. Add an
+                 operation to the main queue to update the record button's state.
+                 */
+                OperationQueue.main.addOperation
+                    {
+                        switch authStatus
+                        {
+                        case .authorized:
+                            print("Authorized");
+                            self.recordButton.isEnabled = true
+                            
+                        case .denied:
+                            print("Denied");
+                            self.recordButton.isEnabled = false
+                            self.recordButton.setTitle("User denied access to speech recognition", for: .disabled)
+                            
+                        case .restricted:
+                            print("Restricted");
+                            self.recordButton.isEnabled = false
+                            self.recordButton.setTitle("Speech recognition restricted on this device", for: .disabled)
+                            
+                        case .notDetermined:
+                            print("Not Determined");
+                            self.recordButton.isEnabled = false
+                            self.recordButton.setTitle("Speech recognition not yet authorized", for: .disabled)
+                        }
                 }
-            }
         }
     }
     
@@ -297,14 +299,27 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     }
     
     @IBAction func micButtonTapped() {
+        NSLog("mic button tapped!");
         var myUtterance = AVSpeechUtterance(string: "")
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         myUtterance.volume = 1
-        myUtterance.rate = 0.1
-        synth.speak(myUtterance)
-        myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
+        myUtterance.rate = 0.3
+        myUtterance = AVSpeechUtterance(string: "recording title")
         synth.speak(myUtterance)
         
+        /*func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+         print("speech finished")
+         self.checkAudioEngine()
+         
+         }*/
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1400), execute: {
+            self.checkAudioEngine()})
+        
+    }
+    
+    public func checkAudioEngine()
+    {
         if audioEngine.isRunning
         {
             audioEngine.stop()
@@ -318,40 +333,51 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             try! startRecording()
             recordButton.setTitle("Stop recording", for: [])
         }
-
     }
     
+    public func checkRecordingIsCorrect()
+    {
+        var myUtterance = AVSpeechUtterance(string: "")
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        myUtterance.volume = 1
+        myUtterance.rate = 0.3
+        myUtterance = AVSpeechUtterance(string: "This is where you sould check input correct")
+        synth.speak(myUtterance)
+    }
     
     @IBAction func recordButtonTapped()
     {
         
-        /*var myUtterance = AVSpeechUtterance(string: "")
-        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        myUtterance.volume = 1
-        myUtterance.rate = 0.1
-        synth.speak(myUtterance)
-        myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
-        synth.speak(myUtterance)
-        
-        if audioEngine.isRunning
-        {
-            audioEngine.stop()
-            recognitionRequest?.endAudio()
-            recordButton.isEnabled = false
-            recordButton.setTitle("Stopping", for: .disabled)
-            // call function to record and replace date text
-        }
-        else
-        {
-            try! startRecording()
-            recordButton.setTitle("Stop recording", for: [])
-        }*/
+        /*
+         var myUtterance = AVSpeechUtterance(string: "")
+         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+         myUtterance.volume = 1
+         myUtterance.rate = 0.1
+         synth.speak(myUtterance)
+         myUtterance = AVSpeechUtterance(string: "Now recording the title of your task")
+         synth.speak(myUtterance)
+         
+         if audioEngine.isRunning
+         {
+         audioEngine.stop()
+         recognitionRequest?.endAudio()
+         recordButton.isEnabled = false
+         recordButton.setTitle("Stopping", for: .disabled)
+         // call function to record and replace date text
+         }
+         else
+         {
+         try! startRecording()
+         recordButton.setTitle("Stop recording", for: [])
+         }
+         */
     }
-
-    override func didReceiveMemoryWarning() {
+    
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 
