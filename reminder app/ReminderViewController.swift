@@ -110,6 +110,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             
             if let result = result {
                 self.dateTextField.text = result.bestTranscription.formattedString
+                self.dateLabel.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
             }
             
@@ -256,6 +257,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             
             if let result = result {
                 self.nameTextField.text = result.bestTranscription.formattedString
+                self.titleLabel.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
             }
             
