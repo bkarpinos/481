@@ -140,7 +140,6 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             let name = nameTextField.text ?? ""
             let dateIn = dateTextField.text ?? ""
             
-            
             let types: NSTextCheckingResult.CheckingType = [.date]
             let detector = try? NSDataDetector(types: types.rawValue)
             let matches = detector?.matches(in: dateIn, options: [], range: NSMakeRange(0, (dateIn as NSString).length))
@@ -149,6 +148,11 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 reminder = Reminder(name: name, date: match.date!)
                 
                 
+            }
+            if(reminder == nil){
+                //Give explanation that date was "bad"
+                //Record new date, call same function used below
+                //prepare() //And then recall us so that we can actually make it correctly
             }
             
             df.dateFormat = "hh:mm a MMMM dd, yyyy"

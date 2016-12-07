@@ -11,22 +11,32 @@ import Foundation
 
 class ReminderTableViewController: UITableViewController {
     
-    //MARK: Properties
+    //MARK: PropertiesView
     
     var reminders = [Reminder]()
     let df = DateFormatter()
     let calen = Calendar.current
+    var timer = Timer()
     
     
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+       super.viewDidLoad()
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        if let savedReminders = loadReminders() {
-            
+        loadDataHelp()
+
+    }
+    
+    func loadDataHelp() {
+    timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.loadData), userInfo: nil, repeats: true)
+    }
+    
+    public func loadData() {
+		reminders = [Reminder]()
+        if let savedReminders = loadReminders(){
             //First filter out expired reminders
             var goodReminders = [Reminder]()
             for reminder in savedReminders {
@@ -34,14 +44,16 @@ class ReminderTableViewController: UITableViewController {
                     goodReminders.append(reminder)
                 }
             }
-                
+            
+            //Then sort what we have left to ascend
             reminders += goodReminders.sorted {$0.date < $1.date}
         }
-        else{
+        else { 
             // Load the sample data.
             loadSampleReminders()
         }
-
+        
+        self.tableView.reloadData()
     }
     
     func loadSampleReminders() {
