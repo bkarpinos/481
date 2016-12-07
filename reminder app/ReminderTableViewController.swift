@@ -16,6 +16,7 @@ class ReminderTableViewController: UITableViewController {
     var reminders = [Reminder]()
     let df = DateFormatter()
     let calen = Calendar.current
+    var timer = Timer()
     
     
 
@@ -25,23 +26,38 @@ class ReminderTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
+        loadData()
+        
+        
+
+    }
+    
+    
+    func loadData() {
+        reminders = [Reminder]()
         if let savedReminders = loadReminders() {
-            reminders += savedReminders
+            var goodReminders = [Reminder]()
+            for reminder in savedReminders {
+                if(reminder.date > Date()) {
+                    goodReminders.append(reminder)
+                }
+            }
+            reminders += goodReminders.sorted {$0.date < $1.date}
         }
         else{
             // Load the sample data.
             loadSampleReminders()
         }
-
+        
+        self.tableView.reloadData()
     }
     
     func loadSampleReminders() {
 
         df.dateFormat = "MMM-dd-yyyy"
-        let reminder1 = Reminder(name: "EECS481: Finish Alpha", date: df.date(from: "Oct-20-2016")!)!
-        let reminder2 = Reminder(name: "TC497: SRS ", date: df.date(from: "Oct-21-2017")!)!
+        let reminder1 = Reminder(name: "EECS481: Final Demo", date: df.date(from: "Dec-12-2016")!)!
         
-        reminders += [reminder1, reminder2]
+        reminders += [reminder1]
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +89,7 @@ class ReminderTableViewController: UITableViewController {
         //Only display the year if it differs from today's
         if(calen.component(.month, from: Date()) == calen.component(.month, from: reminder.date) &&
             calen.component(.day, from: Date()) == calen.component(.day, from: reminder.date)) {
-             df.dateFormat = "hh:mm"
+             df.dateFormat = "hh:mm aa"
         }
         else if(calen.component(.year, from: Date()) == calen.component(.year, from: reminder.date)) {
             df.dateFormat = "MMM dd"
@@ -173,6 +189,8 @@ class ReminderTableViewController: UITableViewController {
         
             saveReminders()
         }
+        
+        loadData()
     }
     
     
