@@ -23,9 +23,13 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     
     @IBOutlet var recordButton: UIButton!
     private let audioEngine = AVAudioEngine()
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var dateTextField: UITextField!
+    //@IBOutlet weak var nameTextField: UITextField!
+    //@IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     
     let today = Date()
     let calen = Calendar.current
@@ -42,25 +46,25 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     var reminder: Reminder?
     
     //MARK: UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard.
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Disable the Save button while editing.
-        saveButton.isEnabled = false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // Disable the Save button while editing.
-        checkValidReminderName()
-    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        // Hide the keyboard.
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        // Disable the Save button while editing.
+//        saveButton.isEnabled = false
+//    }
+//    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        // Disable the Save button while editing.
+//        checkValidReminderName()
+//    }
     
     func checkValidReminderName() {
         // Disable the Save button if the text field is empty.
-        let nameText = nameTextField.text ?? ""
+        let nameText = titleLabel.text ?? ""
         saveButton.isEnabled = (!nameText.isEmpty)
         
     }
@@ -106,7 +110,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             var isFinal = false
             
             if let result = result {
-                self.dateTextField.text = result.bestTranscription.formattedString
+                //self.dateTextField.text = result.bestTranscription.formattedString
+                self.dateLabel.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
             }
             
@@ -140,8 +145,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sender as AnyObject? === saveButton {
-            let name = nameTextField.text ?? ""
-            let dateIn = dateTextField.text ?? ""
+            //let name = nameTextField.text ?? ""
+            let name = titleLabel.text ?? ""
+            //let dateIn = dateTextField.text ?? ""
+            let dateIn = dateLabel.text ?? ""
             
             
             let types: NSTextCheckingResult.CheckingType = [.date]
@@ -171,7 +178,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         //let curYear = calen.component(.year, from: today)
         
         // Do any additional setup after loading the view, typically from a nib.
-        nameTextField.delegate = self
+        //nameTextField.delegate = self
+    
         
         
         recordButton.isEnabled = false
@@ -181,12 +189,15 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             df.dateFormat = "hh:mm a MMMM dd, yyyy"
             
             navigationItem.title = reminder.name
-            nameTextField.text   = reminder.name
-            dateTextField.text = df.string(from: reminder.date)
+            //nameTextField.text   = reminder.name
+            //dateTextField.text = df.string(from: reminder.date)
+
+            titleLabel.text = reminder.name
+            dateLabel.text = df.string(from: reminder.date)
         }
         
         // Enable the Save button only if the text field has a valid Meal name.
-        checkValidReminderName()
+        //checkValidReminderName()
     }
     
     override public func viewDidAppear(_ animated: Bool)
@@ -253,7 +264,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             var isFinal = false
             
             if let result = result {
-                self.nameTextField.text = result.bestTranscription.formattedString
+                //self.nameTextField.text = result.bestTranscription.formattedString
+                self.titleLabel.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
             }
             
@@ -281,7 +293,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         
         try audioEngine.start()
         
-        nameTextField.text = "(Go ahead, I'm listening)"
+        //nameTextField.text = "(Go ahead, I'm listening)"
+        
+        titleLabel.text = "(Go ahead, I'm listening)"
+        
     }
     
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool)
