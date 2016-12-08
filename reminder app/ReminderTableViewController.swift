@@ -27,13 +27,12 @@ class ReminderTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        loadDataHelp()
+        loadData()
+        
+        
 
     }
     
-    func loadDataHelp() {
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.loadData), userInfo: nil, repeats: true)
-    }
     
     func loadData() {
         reminders = [Reminder]()
@@ -191,6 +190,8 @@ class ReminderTableViewController: UITableViewController {
         
             saveReminders()
         }
+        
+        loadData()
     }
     
     
