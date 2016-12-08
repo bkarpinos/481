@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
         //get authorization for sending notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {(accepted, error) in
           if !accepted {
@@ -86,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
+  
   //removes the original notification and creates a new one
   func editNotification(at date: Date, title: String){
     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [title])
@@ -114,5 +117,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       
     }
   }
+  
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              willPresent notification: UNNotification,
+                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+      completionHandler([.alert, .sound])
+  }
 }
+
 
