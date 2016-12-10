@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //takes in the date, title and description
   func scheduleNotification(at date: Date, title: String/*, description: String*/){
       //use a custom sound for our notification
-      let notificationSound = UNNotificationSound(named: "peaceful_piano_music.mp3")
+      let notificationSound = UNNotificationSound(named: "mambo.wav")
       //let notificationSound = UNNotificationSound.default
       //get the date components of the date passed in
       let calendar = Calendar(identifier: .gregorian)
