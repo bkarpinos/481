@@ -27,9 +27,6 @@ class ReminderTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         
         loadData()
-        
-        
-
     }
     
     
