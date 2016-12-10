@@ -17,17 +17,22 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     
     
     //MARK: Properties
+
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     
     @IBOutlet var recordButton: UIButton!
     private var audioEngine = AVAudioEngine()
+    @IBOutlet weak var mic_button: UIButton!
+    
     
     //private let audioEngine = AVAudioRecorder()
     //@IBOutlet weak var nameTextField: UITextField!
     //@IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -77,11 +82,19 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     private func startRecordingDate() throws
     {
         
+        
+
+        
+        //DELAY THE CODE
+        
         let audioSession = AVAudioSession.sharedInstance()
         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+        
+        speakToMe(input: "Say the date of your reminder.", wait: 1500)
+        
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
@@ -115,6 +128,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
                 //self.checkRecordingIsCorrect()
                 self.readBackReminder()
+                
+                self.speakToMe(input: "Press Save To Create New Reminder", wait: 2000)
                 
                 
             
@@ -171,6 +186,9 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        mic_button.isAccessibilityElement = true
+        mic_button.accessibilityTraits = UIAccessibilityTraitPlaysSound
+
         
         //let curYear = calen.component(.year, from: today)
         
@@ -180,6 +198,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         
         
         recordButton.isEnabled = false
+        recordButton.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
         
         if let reminder = reminder
         {
@@ -260,7 +279,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     
     
 
-    private func speakToMe(input : String){
+    private func speakToMe(input : String, wait : Int){
+        
         let synth = AVSpeechSynthesizer()
         
         NSLog("mic button tapped!");
@@ -268,16 +288,32 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         myUtterance.volume = 1
         myUtterance.rate = 0.3
+        print("HELLLLOOO")
+        print(TimeInterval(wait));
+        //myUtterance.postUtteranceDelay = TimeInterval(wait)
         // this one werks
         myUtterance = AVSpeechUtterance(string: input)
         synth.speak(myUtterance)
+        
+        
+        
+
 
     }
     
     
     private func startRecording() throws {
         
-        speakToMe(input: "THIS IS A TEST!!! AHHHH")
+        
+        
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+//            print("continue")
+//        })
+
+
+        
+        //DELAY THE CODE
         
         
         // Cancel the previous task if it's running.
@@ -291,6 +327,11 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+        
+        
+        try audioSession.setActive(false)
+        speakToMe(input: "Say your reminder title.", wait: 3000)
+        try audioSession.setActive(true)
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
@@ -374,7 +415,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
 //        myUtterance = AVSpeechUtterance(string: "Mic CLicked")
 //        synth.speak(myUtterance)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1450), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
             self.checkAudioEngine()})
         
     }

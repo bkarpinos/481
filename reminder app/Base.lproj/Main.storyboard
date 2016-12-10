@@ -97,7 +97,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lvp-sI-a0q" userLabel="Tap to Record">
                                 <rect key="frame" x="110" y="118" width="154" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration" label="Tap to Record"/>
+                                <accessibility key="accessibilityConfiguration" hint="Tap to record">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <state key="normal" image="Button.png">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -105,15 +107,15 @@
                                     <action selector="micButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="EG2-bD-jT1"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhO-xo-wa4">
-                                <rect key="frame" x="16" y="459" width="343" height="66"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhO-xo-wa4">
+                                <rect key="frame" x="16" y="492" width="343" height="119"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uuw-ir-pZk">
-                                <rect key="frame" x="16" y="343" width="343" height="66"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uuw-ir-pZk">
+                                <rect key="frame" x="16" y="343" width="343" height="141"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
@@ -136,6 +138,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="WhO-xo-wa4" id="xef-eh-kJZ"/>
+                        <outlet property="mic_button" destination="Lvp-sI-a0q" id="ug8-0B-A5w"/>
                         <outlet property="recordButton" destination="c6X-W1-uGq" id="zEV-UP-fQZ"/>
                         <outlet property="saveButton" destination="x9m-2t-nuK" id="GeO-m0-7TG"/>
                         <outlet property="titleLabel" destination="Uuw-ir-pZk" id="1AK-Hj-U85"/>
