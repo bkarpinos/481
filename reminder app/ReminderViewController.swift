@@ -260,10 +260,25 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     
     
 
-    
+    private func speakToMe(input : String){
+        let synth = AVSpeechSynthesizer()
+        
+        NSLog("mic button tapped!");
+        var myUtterance = AVSpeechUtterance(string: "")
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        myUtterance.volume = 1
+        myUtterance.rate = 0.3
+        // this one werks
+        myUtterance = AVSpeechUtterance(string: input)
+        synth.speak(myUtterance)
+
+    }
     
     
     private func startRecording() throws {
+        
+        speakToMe(input: "THIS IS A TEST!!! AHHHH")
+        
         
         // Cancel the previous task if it's running.
         if let recognitionTask = recognitionTask {
@@ -328,6 +343,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         
         titleLabel.text = "(Go ahead, I'm listening)"
         
+        //try audioSession.setActive(false)
+        
     }
     
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool)
@@ -346,16 +363,16 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     
     @IBAction func micButtonTapped() {
         
-        let synth = AVSpeechSynthesizer()
-        
-        NSLog("mic button tapped!");
-        var myUtterance = AVSpeechUtterance(string: "")
-        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        myUtterance.volume = 1
-        myUtterance.rate = 0.3
-        // this one werks
-        myUtterance = AVSpeechUtterance(string: "Starting Recording")
-        synth.speak(myUtterance)
+//        let synth = AVSpeechSynthesizer()
+//        
+//        NSLog("mic button tapped!");
+//        var myUtterance = AVSpeechUtterance(string: "")
+//        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//        myUtterance.volume = 1
+//        myUtterance.rate = 0.3
+//        // this one werks
+//        myUtterance = AVSpeechUtterance(string: "Mic CLicked")
+//        synth.speak(myUtterance)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1450), execute: {
             self.checkAudioEngine()})
