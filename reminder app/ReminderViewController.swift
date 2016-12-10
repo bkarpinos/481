@@ -113,7 +113,9 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 //self.dateTextField.text = result.bestTranscription.formattedString
                 self.dateLabel.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
+                print("Setting Date Label")
             }
+            
             
             if error != nil || isFinal {
                 self.audioEngine.stop()
@@ -127,7 +129,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 self.checkRecordingIsCorrect()
                 
             }
+            
+            
         }
+        
         
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
@@ -150,6 +155,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             //let dateIn = dateTextField.text ?? ""
             let dateIn = dateLabel.text ?? ""
             
+            
+            self.checkDate()
             
             let types: NSTextCheckingResult.CheckingType = [.date]
             let detector = try? NSDataDetector(types: types.rawValue)
@@ -237,6 +244,35 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         }
     }
     
+    private func checkDate() {
+        let types: NSTextCheckingResult.CheckingType = [.date]
+        let detector = try? NSDataDetector(types: types.rawValue)
+        let matches = detector?.matches(in: self.dateLabel.text!, options: [], range: NSMakeRange(0, (self.dateLabel.text! as NSString).length))
+        var date: Date?
+        print(matches?.count ?? "SHUT UP!")
+        for match in matches! {
+            //print(match.date ?? "no_date")
+            date = match.date
+        }
+        if(date == nil){
+            //Give explanation that date was "bad"
+            print("date is nil")
+            try! self.startRecordingDate()
+            
+        }
+        else if(date! < Date()) {
+            //Say that date has already passed
+            print("date is past")
+            try! self.startRecordingDate()
+            
+        }
+    }
+    
+    
+
+    
+    
+    
     private func startRecording() throws {
         
         // Cancel the previous task if it's running.
@@ -282,22 +318,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 //call function to listen for date
                 try! self.startRecordingDate()
                 
-                let types: NSTextCheckingResult.CheckingType = [.date]
-                let detector = try? NSDataDetector(types: types.rawValue)
-                let matches = detector?.matches(in: self.dateLabel.text!, options: [], range: NSMakeRange(0, (self.dateLabel.text! as NSString).length))
-                var date = Date()
-                for match in matches! {
-                    //print(match.date ?? "no_date")
-                    date = match.date!
-                }
-                if(matches == nil){
-                    //Give explanation that date was "bad"
-                    try! self.startRecordingDate()
-                }
-                else if(date < Date()) {
-                    //Say that date has already passed
-                    try! self.startRecordingDate()
-                }                    }
+
+            }
         }
         
         let recordingFormat = inputNode.outputFormat(forBus: 0)
