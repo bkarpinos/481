@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Foundation
 
 class ReminderTableViewController: UITableViewController {
@@ -204,3 +205,4 @@ class ReminderTableViewController: UITableViewController {
     }
 
 }
+

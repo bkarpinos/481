@@ -281,7 +281,23 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 
                 //call function to listen for date
                 try! self.startRecordingDate()
-            }
+                
+                let types: NSTextCheckingResult.CheckingType = [.date]
+                let detector = try? NSDataDetector(types: types.rawValue)
+                let matches = detector?.matches(in: self.dateLabel.text!, options: [], range: NSMakeRange(0, (self.dateLabel.text! as NSString).length))
+                var date = Date()
+                for match in matches! {
+                    //print(match.date ?? "no_date")
+                    date = match.date!
+                }
+                if(matches == nil){
+                    //Give explanation that date was "bad"
+                    try! self.startRecordingDate()
+                }
+                else if(date < Date()) {
+                    //Say that date has already passed
+                    try! self.startRecordingDate()
+                }                    }
         }
         
         let recordingFormat = inputNode.outputFormat(forBus: 0)
