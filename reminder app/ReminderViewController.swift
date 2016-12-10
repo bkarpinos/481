@@ -284,7 +284,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 
                 let types: NSTextCheckingResult.CheckingType = [.date]
                 let detector = try? NSDataDetector(types: types.rawValue)
-                let matches = detector?.matches(in: self.dateTextField.text!, options: [], range: NSMakeRange(0, (self.dateTextField.text! as NSString).length))
+                let matches = detector?.matches(in: self.dateLabel.text!, options: [], range: NSMakeRange(0, (self.dateLabel.text! as NSString).length))
                 var date = Date()
                 for match in matches! {
                     //print(match.date ?? "no_date")
