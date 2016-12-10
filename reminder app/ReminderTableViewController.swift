@@ -90,10 +90,10 @@ class ReminderTableViewController: UITableViewController {
              df.dateFormat = "hh:mm aa"
         }
         else if(calen.component(.year, from: Date()) == calen.component(.year, from: reminder.date)) {
-            df.dateFormat = "MMM dd"
+            df.dateFormat = "MMMM dd"
         }
         else {
-            df.dateFormat = "MMM dd yyyy"
+            df.dateFormat = "MMMM dd yyyy"
         }        // Configure the cell...
         cell.nameLabel.text = reminder.name
         cell.dateLabel.text = df.string(from: reminder.date)
