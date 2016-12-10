@@ -22,7 +22,9 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     private var recognitionTask: SFSpeechRecognitionTask?
     
     @IBOutlet var recordButton: UIButton!
-    private let audioEngine = AVAudioEngine()
+    private var audioEngine = AVAudioEngine()
+    
+    //private let audioEngine = AVAudioRecorder()
     //@IBOutlet weak var nameTextField: UITextField!
     //@IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -36,32 +38,16 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     let df = DateFormatter()
     var dc = DateComponents()
     
-    let synth = AVSpeechSynthesizer()
+    //let synth = AVSpeechSynthesizer()
     
     /*
      This value is either passed by `ReminderTableViewController` in `prepareForSegue(_:sender:)`
-     or constructed as part of adding a new meal.
+     or constructed as part of adding a new reminder.
      */
     
     var reminder: Reminder?
     
-    //MARK: UITextFieldDelegate
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        // Hide the keyboard.
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//    
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        // Disable the Save button while editing.
-//        saveButton.isEnabled = false
-//    }
-//    
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        // Disable the Save button while editing.
-//        checkValidReminderName()
-//    }
-    
+
     func checkValidReminderName() {
         // Disable the Save button if the text field is empty.
         let nameText = titleLabel.text ?? ""
@@ -92,9 +78,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     {
         
         let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(AVAudioSessionCategoryRecord)
+        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
@@ -126,12 +113,15 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 
                 self.recordButton.isEnabled = true
                 self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
-                self.checkRecordingIsCorrect()
+                //self.checkRecordingIsCorrect()
                 self.readBackReminder()
+                
+                
+            
             }
-            
-            
+
         }
+        try audioSession.setActive(false)
         
         
         let recordingFormat = inputNode.outputFormat(forBus: 0)
@@ -282,9 +272,10 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         }
         
         let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(AVAudioSessionCategoryRecord)
+        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
@@ -317,6 +308,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
                 
                 //call function to listen for date
                 try! self.startRecordingDate()
+                
+                //self.audioEngine.reset()
                 
 
             }
@@ -352,13 +345,16 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     }
     
     @IBAction func micButtonTapped() {
+        
+        let synth = AVSpeechSynthesizer()
+        
         NSLog("mic button tapped!");
         var myUtterance = AVSpeechUtterance(string: "")
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         myUtterance.volume = 1
         myUtterance.rate = 0.3
         // this one werks
-        myUtterance = AVSpeechUtterance(string: "recording title")
+        myUtterance = AVSpeechUtterance(string: "Starting Recording")
         synth.speak(myUtterance)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1450), execute: {
@@ -375,6 +371,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             recordButton.isEnabled = false
             recordButton.setTitle("Stopping", for: .disabled)
             // call function to record and replace date text
+            
+            //self.audioEngine.reset()
         }
         else
         {
@@ -383,18 +381,23 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         }
     }
     
-    public func checkRecordingIsCorrect()
-    {
-        var myUtterance = AVSpeechUtterance(string: "")
-        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        myUtterance.volume = 1
-        myUtterance.rate = 0.3
-        myUtterance = AVSpeechUtterance(string: "This is where you sould check input correct")
-        synth.speak(myUtterance)
-    }
-    
+//    public func checkRecordingIsCorrect()
+//    {
+//        
+//        let synth = AVSpeechSynthesizer()
+//        
+//        var myUtterance = AVSpeechUtterance(string: "")
+//        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//        myUtterance.volume = 1
+//        myUtterance.rate = 0.3
+//        myUtterance = AVSpeechUtterance(string: "This is where you sould check input correct")
+//        synth.speak(myUtterance)
+//    }
+//    
     public func readBackReminder()
     {
+        let synth = AVSpeechSynthesizer()
+        
         NSLog("reading back the reminder...");
 
         
@@ -405,12 +408,12 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             myUtterance.rate = 0.3
             // this one werks
             
-            let sayBack = "your reminder title is " + self.titleLabel.text! + " on the date " + self.dateLabel.text!
-            NSLog("hi " + sayBack);
+            let sayBack = "your reminder for " + self.titleLabel.text! + " is set on the date " + self.dateLabel.text!
+            NSLog("hi, " + sayBack);
             
             
             myUtterance = AVSpeechUtterance(string: sayBack)
-            self.synth.speak(myUtterance)
+            synth.speak(myUtterance)
         
         })
     }
