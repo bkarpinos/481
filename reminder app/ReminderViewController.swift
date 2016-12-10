@@ -380,8 +380,8 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         myUtterance.rate = 0.3
         // this one werks
 
-        var sayBack = "your reminder title is" + titleLabel.text! + "on the date " + dateLabel.text!
-        NSlog(" hi" + sayBack);
+        let sayBack = "your reminder title is" + titleLabel.text! + "on the date " + dateLabel.text!
+        NSLog(" hi" + sayBack);
         
         
         myUtterance = AVSpeechUtterance(string: sayBack)
