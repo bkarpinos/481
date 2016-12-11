@@ -79,77 +79,6 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
     }
     
     
-    private func startRecordingDate() throws
-    {
-        
-        
-
-        
-        //DELAY THE CODE
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
-        try audioSession.setMode(AVAudioSessionModeMeasurement)
-        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-        try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
-        
-        speakToMe(input: "Say the date of your reminder.", wait: 1500)
-        
-        
-        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        
-        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
-        guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
-        
-        // Configure request so that results are returned before audio recording is finished
-        recognitionRequest.shouldReportPartialResults = true
-        
-        // A recognition task represents a speech recognition session.
-        // We keep a reference to the task so that it can be cancelled.
-        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
-            var isFinal = false
-            
-            if let result = result {
-                //self.dateTextField.text = result.bestTranscription.formattedString
-                self.dateLabel.text = result.bestTranscription.formattedString
-                isFinal = result.isFinal
-                print("Setting Date Label")
-            }
-            
-            
-            if error != nil || isFinal {
-                self.audioEngine.stop()
-                inputNode.removeTap(onBus: 0)
-                
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
-                
-                self.recordButton.isEnabled = true
-                self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
-                //self.checkRecordingIsCorrect()
-                self.readBackReminder()
-                
-                self.speakToMe(input: "Press Save To Create New Reminder", wait: 2000)
-                
-                
-            
-            }
-
-        }
-        try audioSession.setActive(false)
-        
-        
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-            self.recognitionRequest?.append(buffer)
-        }
-        
-        audioEngine.prepare()
-        
-        try audioEngine.start()
-        
-        //nameTextField.text = "(Go ahead, I'm listening)"
-    }
     
     
     // This method lets you configure a view controller before it's presented.
@@ -176,7 +105,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             df.dateFormat = "hh:mm a MMMM dd, yyyy"
             
         }
-    }
+    }//END prepare
     
     
     //MARK: Actions
@@ -388,6 +317,73 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         
     }
     
+    private func startRecordingDate() throws
+    {
+        
+        //DELAY THE CODE
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
+        try audioSession.setMode(AVAudioSessionModeMeasurement)
+        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+        
+        speakToMe(input: "Say the date of your reminder.", wait: 1500)
+        
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
+        
+        // Configure request so that results are returned before audio recording is finished
+        recognitionRequest.shouldReportPartialResults = true
+        
+        // A recognition task represents a speech recognition session.
+        // We keep a reference to the task so that it can be cancelled.
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+            var isFinal = false
+            
+            if let result = result {
+                //self.dateTextField.text = result.bestTranscription.formattedString
+                self.dateLabel.text = result.bestTranscription.formattedString
+                isFinal = result.isFinal
+                print("Setting Date Label")
+            }
+            
+            
+            if error != nil || isFinal {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                
+                self.recognitionRequest = nil
+                self.recognitionTask = nil
+                
+                self.recordButton.isEnabled = true
+                self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
+                //self.readBackReminder()
+                let playback = "Your reminder for " + self.titleLabel.text! + " is set on the date " + self.dateLabel.text! + "..... Press save to save your reminder. "
+                self.speakToMe(input : playback, wait: 2000)
+
+                
+            }
+            
+        }
+        try audioSession.setActive(false)
+        
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        try audioEngine.start()
+        
+        //nameTextField.text = "(Go ahead, I'm listening)"
+        
+    }//END start Recording Date
+    
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool)
     {
         if available
@@ -454,26 +450,26 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
 //    
     public func readBackReminder()
     {
-        let synth = AVSpeechSynthesizer()
-        
-        NSLog("reading back the reminder...");
-
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-            var myUtterance = AVSpeechUtterance(string: "")
-            myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            myUtterance.volume = 1
-            myUtterance.rate = 0.3
-            // this one werks
-            
-            let sayBack = "your reminder for " + self.titleLabel.text! + " is set on the date " + self.dateLabel.text!
-            NSLog("hi, " + sayBack);
-            
-            
-            myUtterance = AVSpeechUtterance(string: sayBack)
-            synth.speak(myUtterance)
-        
-        })
+//        let synth = AVSpeechSynthesizer()
+//        
+//        NSLog("reading back the reminder...");
+//
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//            var myUtterance = AVSpeechUtterance(string: "")
+//            myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//            myUtterance.volume = 1
+//            myUtterance.rate = 0.3
+//            // this one werks
+//            
+//            let sayBack = "your reminder for " + self.titleLabel.text! + " is set on the date " + self.dateLabel.text!
+//            NSLog("hi, " + sayBack);
+//            
+//            
+//            myUtterance = AVSpeechUtterance(string: sayBack)
+//            synth.speak(myUtterance)
+//        
+//        })
     }
     
     @IBAction func recordButtonTapped()
