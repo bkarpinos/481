@@ -352,40 +352,44 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             }
             
             
-            if error != nil || isFinal {
+            if error != nil || isFinal
+            {
                 self.audioEngine.stop()
                 
                 
                 
-                if (self.checkDate() == true){
+                if (self.checkDate() == true)
+                {
                     //try audioSession.setActive(false)
                     //self.mic_button.sendActions(for: .touchUpInside);
                     inputNode.removeTap(onBus: 0);
                     self.recordButton.setTitle("Please record new title name", for: [])
 
-                    /*self.recognitionRequest = nil
+                    /*
+                     self.recognitionRequest = nil
                      self.recognitionTask = nil
-                     
                      self.recordButton.setTitle("Please record new title name", for: [])
                      let playback = "Try to record your new title"
-                     self.speakToMe(input : playback, wait: 2500)*/
+                     self.speakToMe(input : playback, wait: 2500)
+                    */
 
                     self.dateLabel.text = ""
                     try! self.startRecordingDate()
                 }
-                
-                
-                inputNode.removeTap(onBus: 0)
-                
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
-                
-                self.recordButton.isEnabled = true
-                self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
-                //self.readBackReminder()
-                let playback = "Your reminder for " + self.titleLabel.text! + " is set on the date " + self.dateLabel.text! + "..... Press save to save your reminder. "
-                self.speakToMe(input : playback, wait: 2000)
-                self.saveButton.isEnabled = true;
+                else
+                {
+                    inputNode.removeTap(onBus: 0)
+                    
+                    self.recognitionRequest = nil
+                    self.recognitionTask = nil
+                    
+                    self.recordButton.isEnabled = true
+                    self.recordButton.setTitle("Press Save To Create New Reminder", for: [])
+                    //self.readBackReminder()
+                    let playback = "Your reminder for " + self.titleLabel.text! + " is set on the date " + self.dateLabel.text! + "..... Press save to save your reminder. "
+                    self.speakToMe(input : playback, wait: 2000)
+                    self.saveButton.isEnabled = true;
+                }
             }
             
         }
