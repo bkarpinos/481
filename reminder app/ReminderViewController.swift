@@ -90,7 +90,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             let dateIn = dateLabel.text ?? ""
             
             
-            self.checkDate()
+            //self.checkDate()
             
             let types: NSTextCheckingResult.CheckingType = [.date]
             let detector = try? NSDataDetector(types: types.rawValue)
@@ -184,7 +184,7 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         }
     }
     
-    private func checkDate() {
+    private func checkDate() -> Bool{
         let types: NSTextCheckingResult.CheckingType = [.date]
         let detector = try? NSDataDetector(types: types.rawValue)
         let matches = detector?.matches(in: self.dateLabel.text!, options: [], range: NSMakeRange(0, (self.dateLabel.text! as NSString).length))
@@ -197,15 +197,17 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
         if(date == nil){
             //Give explanation that date was "bad"
             print("date is nil")
-            try! self.startRecordingDate()
+            return true
             
         }
         else if(date! < Date()) {
             //Say that date has already passed
             print("date is past")
-            try! self.startRecordingDate()
+            return true
             
         }
+        
+        return false
     }
     
     
@@ -352,6 +354,27 @@ class ReminderViewController: UIViewController, UITextFieldDelegate, SFSpeechRec
             
             if error != nil || isFinal {
                 self.audioEngine.stop()
+                
+                
+                
+                if (self.checkDate() == true){
+                    //try audioSession.setActive(false)
+                    //self.mic_button.sendActions(for: .touchUpInside);
+                    inputNode.removeTap(onBus: 0);
+                    self.recordButton.setTitle("Please record new title name", for: [])
+
+                    /*self.recognitionRequest = nil
+                     self.recognitionTask = nil
+                     
+                     self.recordButton.setTitle("Please record new title name", for: [])
+                     let playback = "Try to record your new title"
+                     self.speakToMe(input : playback, wait: 2500)*/
+
+                    self.dateLabel.text = ""
+                    try! self.startRecordingDate()
+                }
+                
+                
                 inputNode.removeTap(onBus: 0)
                 
                 self.recognitionRequest = nil
