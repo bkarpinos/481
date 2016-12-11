@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let content = UNMutableNotificationContent()
       content.categoryIdentifier = "reminderCategory"
       content.title = title
-      content.body = "Reminder"
+      content.body = title
       content.sound = notificationSound
     
       //use the title as the identifier
